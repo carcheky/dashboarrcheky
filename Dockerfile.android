@@ -1,0 +1,86 @@
+# Dockerfile.android
+# Builds the LunaSea Flutter app as an Android APK inside Docker.
+#
+# Build:    docker build -f Dockerfile.android -t lunasea-android-builder .
+# Run:      docker compose -f docker-compose.android.yml run --rm build
+# Or directly: docker run --rm -v "$(pwd)/lunasea:/app" -v lunasea-gradle:/root/.gradle -v lunasea-pub:/root/.pub-cache lunasea-android-builder
+#
+# This Dockerfile intentionally does NOT install adb — adb lives on the
+# WSL host so it can talk to the USB-passthrough Android device.
+
+# -----------------------------------------------------------------------------
+# Stage 1: builder — all toolchains in one image (no multi-stage; we keep the
+# APK output as an artifact rather than copying it into a runtime image).
+# -----------------------------------------------------------------------------
+FROM debian:bookworm-slim AS builder
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    ANDROID_HOME=/opt/android-sdk \
+    ANDROID_SDK_ROOT=/opt/android-sdk \
+    JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 \
+    FLUTTER_HOME=/opt/flutter \
+    PUB_CACHE=/root/.pub-cache \
+    GRADLE_USER_HOME=/root/.gradle \
+    PATH=/opt/flutter/bin:/opt/android-sdk/cmdline-tools/latest/bin:/opt/android-sdk/platform-tools:/usr/lib/jvm/java-17-openjdk-amd64/bin:/root/.pub-cache/bin:/usr/local/bin:/usr/bin:/bin
+
+# -----------------------------------------------------------------------------
+# System packages: JDK 17, git, curl, wget, unzip, xz, ca-certificates, nodejs.
+# -----------------------------------------------------------------------------
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+        git \
+        gnupg \
+        openjdk-17-jdk-headless \
+        unzip \
+        wget \
+        xz-utils \
+ && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+ && apt-get install -y --no-install-recommends nodejs \
+ && rm -rf /var/lib/apt/lists/* \
+ && node --version \
+ && npm --version \
+ && java -version 2>&1 | head -1 \
+ && javac -version 2>&1
+
+# -----------------------------------------------------------------------------
+# Flutter SDK (stable, pinned to satisfy pubspec.lock >=3.27.0).
+# Using --depth 1 keeps the clone small; precache only Android to save space.
+# -----------------------------------------------------------------------------
+ARG FLUTTER_VERSION=3.27.4
+RUN git clone --depth 1 --branch ${FLUTTER_VERSION} https://github.com/flutter/flutter.git ${FLUTTER_HOME} \
+ && flutter --disable-analytics \
+ && flutter --version \
+ && flutter precache --android --no-ios --no-web --no-linux --no-macos --no-windows --no-fuchsia \
+ && dart --disable-analytics
+
+# -----------------------------------------------------------------------------
+# Android SDK: commandline-tools, platform 35, build-tools 35.0.0, platform-tools.
+# -----------------------------------------------------------------------------
+ARG ANDROID_CMDLINE_TOOLS_VERSION=11076708
+RUN mkdir -p ${ANDROID_HOME}/cmdline-tools \
+ && cd ${ANDROID_HOME}/cmdline-tools \
+ && wget -q https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_CMDLINE_TOOLS_VERSION}_latest.zip -O cmdline-tools.zip \
+ && unzip -q cmdline-tools.zip \
+ && rm cmdline-tools.zip \
+ && mv cmdline-tools latest \
+ && yes | sdkmanager --licenses > /dev/null 2>&1 \
+ && sdkmanager --install "platform-tools" "platforms;android-35" "build-tools;35.0.0" \
+ && sdkmanager --install "emulator" "system-images;android-35;google_apis;x86_64" || true \
+ && rm -rf ${ANDROID_HOME}/.downloadCache
+
+# -----------------------------------------------------------------------------
+# Workspace
+# -----------------------------------------------------------------------------
+WORKDIR /app
+
+# Pre-warm pub cache (copy lockfiles first for layer caching).
+# The actual source is bind-mounted at runtime; this just makes rebuilds faster
+# if you also do `COPY lunasea lunasea` in a one-shot build.
+COPY lunasea/pubspec.yaml lunasea/pubspec.lock ./lunasea/
+RUN cd lunasea && flutter pub get --offline || flutter pub get
+
+# Default command. Use `command:` in docker-compose.android.yml to override.
+# We intentionally leave ENTRYPOINT empty so compose's `command:` runs verbatim.
+CMD ["bash", "-c", "echo 'Container ready. Run: docker compose -f docker-compose.android.yml run --rm build' && flutter --version"]
