@@ -7,6 +7,8 @@ Why we did things the way we did.
 | [0001](0001-docker-build.md)                     | Build APKs inside Docker, not on the host.              |
 | [0002](0002-branching-model.md)                  | master + beta + feature/* branches, SemVer tags.        |
 | [0003](0003-docs-strategy.md)                    | mkdocs-formatted docs with selective AI loading.        |
+| [0004](0004-toolchain-and-16kb-page-size.md)      | Android toolchain + 16 KB page-size compatibility plan. |
+| [0005](0005-spec-driven-workflow.md)              | Spec phase (requirements/design/tasks) before code.     |
 
 ## Format
 

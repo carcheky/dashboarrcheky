@@ -3,6 +3,9 @@ site_description: Documentation for the LunaSea fork at github.com/carcheky/dash
 site_author: carcheky
 site_url: https://carcheky.github.io/dashboarrcheky/
 
+extra_css:
+  - stylesheets/extra.css
+
 repo_url: https://github.com/carcheky/dashboarrcheky
 repo_name: carcheky/dashboarrcheky
 edit_uri: edit/master/docs/
@@ -71,10 +74,16 @@ plugins:
           - reference/env-vars.md
           - reference/gradle.md
           - reference/codegen.md
+          - reference/toolchain.md
         Features:
           - features/TEMPLATE.md
         Fixes:
           - fixes/TEMPLATE.md
+          - fixes/android-predictive-back.md
+        Specs:
+          - specs/TEMPLATE/requirements.md
+          - specs/TEMPLATE/design.md
+          - specs/TEMPLATE/tasks.md
 
 nav:
   - Home: index.md
@@ -98,6 +107,7 @@ nav:
       - Template: features/TEMPLATE.md
   - Fixes:
       - Template: fixes/TEMPLATE.md
+      - Android predictive back: fixes/android-predictive-back.md
   - API & Data:
       - Overview: api/index.md
       - HTTP (Dio + Retrofit): api/http.md
@@ -107,8 +117,15 @@ nav:
       - Environment Variables: reference/env-vars.md
       - Gradle Config: reference/gradle.md
       - Codegen Pipeline: reference/codegen.md
+      - Toolchain: reference/toolchain.md
+  - Specs:
+      - Template: specs/TEMPLATE/requirements.md
+      - Template (design): specs/TEMPLATE/design.md
+      - Template (tasks): specs/TEMPLATE/tasks.md
   - Decisions (ADR):
       - Index: adr/index.md
       - 0001 Docker build: adr/0001-docker-build.md
       - 0002 Branching model: adr/0002-branching-model.md
       - 0003 Docs strategy: adr/0003-docs-strategy.md
+      - 0004 Toolchain & 16KB page size: adr/0004-toolchain-and-16kb-page-size.md
+      - 0005 Spec-driven workflow: adr/0005-spec-driven-workflow.md
