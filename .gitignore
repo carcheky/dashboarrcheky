@@ -22,8 +22,12 @@ npm-debug.log*
 .npm/
 
 # Docker / build artifacts (per-package .gitignore covers the rest)
-site/                    # mkdocs output
-.venv-docs/              # local mkdocs build venv
+
+# mkdocs output
+site/
+
+# local mkdocs build venv
+.venv-docs/
 
 # Local-only Claude settings (machine-specific)
 .claude/settings.local.json.tmp.*
