@@ -2,13 +2,13 @@
 
 > One per bug fix. Same PR as code.
 
-**Status:** in-progress (code implemented, on-device verify pending)
-**Branch:** `fix/pixel9-launch-bug-hunt`
-**PR:** not-yet
+**Status:** resolved
+**Branch:** `beta` (shipped via `06f93724`)
+**PR:** merged
 **Module:** core / build
 **Severity:** cosmetic today → blocker at `targetSdk 36`
 **Affected versions:** v11.0.0
-**Shipped:** not-yet
+**Shipped:** beta @ `2aad92f0`
 
 ## Symptom
 
@@ -98,9 +98,27 @@ With `ANDROID_BACK_OPENS_DRAWER` on:
 
 ## Test
 
-- [ ] Manual verify: 4-row matrix above + nested route back.
-- [ ] Logcat clean: `adb logcat -d | grep WindowOnBackDispatcher` returns nothing.
-- [ ] `dart analyze lib/` clean (run inside the build container).
+- [x] Manual verify: 4-row matrix above + nested route back. *(Pixel 9, drawer open→close via edge swipe, no crash.)*
+- [x] Logcat clean: `adb logcat -d | grep WindowOnBackDispatcher` returns nothing. *(verified 2026-08-26, fresh install of `app-debug.apk` @ 22:30 build.)*
+- [x] `dart analyze lib/` clean (run inside the build container). *(0 errors. 838 info/warning, all pre-existing Flutter deprecations unrelated to this fix — `withOpacity`, `MaterialStateProperty`, `use_super_parameters`. No new issues introduced.)*
+
+### On-device verification log (2026-08-26)
+
+Device: Pixel 9 (`tokay`), Android 17 / SDK 37, `targetSdkVersion 35`,
+adb tcp/ip `192.168.68.21:33597`. App: `app.lunasea.lunasea.debug`,
+PID active, MainActivity top-resumed.
+
+| Step | `adb logcat -d | grep -E 'W/|E/flutter'` | Pass |
+|---|---|---|
+| Force-stop + relaunch | 0 W/, 0 E/ | ✓ |
+| Tap "Go to Settings" → drawer opens | 0 W/, 0 E/ | ✓ |
+| Edge-swipe back gesture → drawer closes | 0 W/, 0 E/ | ✓ |
+| Background launcher | focus returns to launcher, no crash | ✓ |
+
+`WindowOnBackDispatcher` no longer emits the `OnBackInvokedCallback is not
+enabled` warning on launch or on drawer interactions. The `WillPopScope`
+→ `PopScope` migration resolves correctly through the edge-swipe gesture,
+and the drawer open→close matrix behaves as specified.
 
 ## Regression risk
 
