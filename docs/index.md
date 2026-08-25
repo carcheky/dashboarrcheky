@@ -97,11 +97,10 @@ hide:
 
 This site is dual-mode. Humans browse the UI. Agents read the files directly:
 
-- `CLAUDE.md` at repo root = router (load only what matches your task)
-- `AGENTS.md` mirror for Cursor / Codex / Copilot
+- `AGENTS.md` at repo root = router (load only what matches your task)
 - `/llms.txt` = sectioned index for crawlers
 - `/llms-full.txt` = full corpus in one fetch
 - `docs/features/<slug>.md` = one per shipped feature
 - `docs/fixes/<slug>.md` = one per shipped fix
 - `.agents/sessions/<date>-<slug>.md` = session handoffs (latest first)
-- `.claude/agents/` = sub-agents: feature-builder, fix-investigator, docs-keeper
+- `.agents/skills/<slug>/SKILL.md` = procedural skills (cross-tool)

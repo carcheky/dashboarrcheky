@@ -34,7 +34,9 @@ cat lunasea/android/gradle/wrapper/gradle-wrapper.properties
 cat lunasea/android/gradle.properties
 
 # What actually ran last build
-grep -E 'Gradle [0-9]|AGP|Compatible with' .claude/tmp/build.log | tail -20
+# (build logs were tracked in .claude/tmp/build.log pre-2026-08-26; that
+#  directory has been removed, see ADR-0003 follow-up. Re-run the build
+#  if you need fresh logs.)
 ```
 
 ## 16 KB page-size compatibility

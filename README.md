@@ -16,7 +16,7 @@ archived for reference only — **active dev is in `lunasea/`**.
 | App code | [`lunasea/`](lunasea/) |
 | Documentation site | [`docs/`](docs/) → published at <https://carcheky.github.io/dashboarrcheky/> |
 | Human-readable doc index | [`docs/index.md`](docs/index.md) |
-| AI agent briefing | [`CLAUDE.md`](CLAUDE.md) (router) / [`AGENTS.md`](AGENTS.md) |
+| AI agent briefing | [`AGENTS.md`](AGENTS.md) (router) |
 | Decisions (ADRs) | [`docs/adr/`](docs/adr/) |
 | Per-feature specs | [`docs/specs/`](docs/specs/) |
 | Roadmap | [`docs/roadmap.md`](docs/roadmap.md) |
@@ -40,9 +40,7 @@ adb install -r lunasea/build/app/outputs/flutter-apk/app-debug.apk
 adb shell am start -n app.lunasea.lunasea.debug/app.lunasea.lunasea.MainActivity
 ```
 
-See [`docs/build.md`](docs/build.md) for the full loop and
-[`.claude/skills/lunasea-build/SKILL.md`](.claude/skills/lunasea-build/SKILL.md)
-for an agent-readable summary.
+See [`docs/build.md`](docs/build.md) for the full loop.
 
 ## Branches
 

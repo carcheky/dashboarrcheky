@@ -35,14 +35,10 @@ docs/                       mkdocs source (Material theme)
 ├── reference/              env, gradle, codegen.
 └── adr/                    Why-decisions.
 
-CLAUDE.md                   Router for Claude Code.
-AGENTS.md                   Same router, for Cursor / Codex / Copilot.
+AGENTS.md                   Router for all AI coding agents (Claude Code, Cursor, Codex, Copilot, Zed, ...).
 .agents/
-├── skills/                 AI skills.
+├── skills/                 Cross-tool procedural skills.
 └── sessions/               Per-session handoffs (latest read first).
-.claude/
-├── skills/                 Claude-only skills.
-└── agents/                 Sub-agents.
 ```
 
 ### Doc per change (mandatory)
@@ -59,9 +55,7 @@ Same PR. Conventional commit footer `Docs: <path>`.
 
 ### AI agent access
 
-- `CLAUDE.md` at root = router. Read first.
-- `AGENTS.md` = mirror for non-Claude tools.
-- Both kept in sync. Same content.
+- `AGENTS.md` at root = router. Read first.
 - Router maps task → doc path. Load only what matches. No "load everything".
 
 ### llms.txt
@@ -76,15 +70,14 @@ Default writing style. Short words. Tables > prose. No filler. Code > explanatio
 
 `.agents/sessions/<YYYY-MM-DD>-<slug>.md`. Append-only. Latest = most recent work. AI agents read the latest one at session start.
 
-### Sub-agents
+### Sub-agents (superseded)
 
-`.claude/agents/`:
-
-| Agent | Use |
-|-------|-----|
-| `feature-builder` | New feature end-to-end: code + tests + doc |
-| `fix-investigator` | Bug triage + fix + regression test + doc |
-| `docs-keeper` | Doc hygiene: detects drift, syncs llms.txt, validates templates |
+Original design used Claude Code's `.claude/agents/` sub-agent convention
+(`feature-builder`, `fix-investigator`, `docs-keeper`). Removed 2026-08-26
+when consolidating around the cross-tool `AGENTS.md` + `.agents/`
+convention. Procedural knowledge that used to live in those sub-agents
+is now in `.agents/skills/` (cross-tool) or in session handoffs under
+`.agents/sessions/`.
 
 ## Consequences
 
@@ -100,7 +93,7 @@ Default writing style. Short words. Tables > prose. No filler. Code > explanatio
 
 - Discipline required: every PR writes a doc. No exceptions.
 - mkdocs build pipeline required for llms.txt.
-- AI agent behavior depends on it reading the router. Tested empirically in CLAUDE.md instruction.
+- AI agent behavior depends on it reading the router. Tested empirically in AGENTS.md instruction.
 
 ### Mitigations
 

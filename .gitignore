@@ -29,6 +29,5 @@ site/
 # local mkdocs build venv
 .venv-docs/
 
-# Local-only Claude settings (machine-specific)
-.claude/settings.local.json.tmp.*
-.claude/settings.local.json
+# Local-only agent config (per-machine, not in repo)
+.claude/

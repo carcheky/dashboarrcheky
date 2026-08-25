@@ -35,7 +35,7 @@ it.
 
 External systems are **not installed**. Reasons:
 
-- The repo's router (`CLAUDE.md`) already names the sub-agents and skills
+- The repo's router (`AGENTS.md`) already names the sub-agents and skills
   that read these files. Adding a CLI would duplicate that router.
 - `docs/conventions.md` already mandates `Docs:` footer on every commit;
   we extend it to also point at the spec dir.
