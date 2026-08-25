@@ -58,6 +58,8 @@ plugins:
       sections:
         Project:
           - index.md
+          - roadmap.md
+          - timeline.md
         Build & Workflow:
           - build.md
           - workflow.md
@@ -87,6 +89,8 @@ plugins:
 
 nav:
   - Home: index.md
+  - Roadmap: roadmap.md
+  - Timeline: timeline.md
   - Build & Install: build.md
   - Git Workflow: workflow.md
   - Conventions: conventions.md
