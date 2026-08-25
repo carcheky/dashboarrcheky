@@ -44,6 +44,9 @@ Skip pleasantries. Lead with answer.
 - ✅ Session handoff → update `.agents/sessions/<date>-<slug>.md` before closing.
 - ✅ Public Dart classes prefixed `Luna`.
 - ✅ New Hive fields at end with `defaultValue:`. Never reorder.
+- ✅ When you spot a fix-doc `in-progress` / `pending` whose code already shipped → flip to `resolved` with verification log in the same PR.
+- ✅ When you spot stale session handoffs / wrong router entries / outdated conventions → fix them in-place same PR, don't queue for "later".
+- ✅ When surfacing multiple bugs/features, decide the execution order yourself: blockers > nice-to-have, dependencies first, and rank against active `Pending` items in handoffs. User specifies order only if they say so.
 
 ## NEVER
 
