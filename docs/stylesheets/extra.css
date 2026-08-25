@@ -1,0 +1,219 @@
+/* ============================================================
+   dashboarrcheky — landing page styles
+   Hero + feature cards + palette tweaks
+   ============================================================ */
+
+/* --- palette: indigo → cyan accent (distinctive) --- */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color:        #3b3f88;
+  --md-primary-fg-color--light: #5a5fb0;
+  --md-primary-fg-color--dark:  #2a2d6e;
+  --md-accent-fg-color:         #06b6d4;
+  --md-accent-fg-color--transparent: #06b6d433;
+  --md-accent-bg-color:         #fff;
+  --md-accent-bg-color--light:  #ffffffb3;
+}
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color:        #2a2d6e;
+  --md-primary-fg-color--light: #5a5fb0;
+  --md-primary-fg-color--dark:  #1a1c4f;
+  --md-accent-fg-color:         #22d3ee;
+}
+
+/* --- hide nav chrome on the home page only --- */
+.md-content .home-only { display: none; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.home-hero {
+  position: relative;
+  margin: 1.5rem 0 2.5rem;
+  padding: 4rem 2rem 3.5rem;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+  background:
+    radial-gradient(ellipse at top left, #06b6d455 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, #3b3f8888 0%, transparent 50%),
+    linear-gradient(135deg, #1a1c4f 0%, #3b3f88 50%, #2a2d6e 100%);
+  box-shadow: 0 10px 40px -10px #00000055;
+}
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+.home-hero > * { position: relative; z-index: 1; }
+
+.home-hero h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: #fff;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+.home-hero .home-tagline {
+  margin: 0 auto 1.5rem;
+  max-width: 36rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  opacity: 0.92;
+  line-height: 1.5;
+}
+.home-hero .home-cta {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.home-hero .home-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.3rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.home-hero .home-cta a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px -4px #00000077;
+}
+.home-hero .home-cta a.primary {
+  background: #06b6d4;
+  color: #0a1929;
+}
+.home-hero .home-cta a.primary:hover { background: #22d3ee; }
+.home-hero .home-cta a.secondary {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.home-hero .home-cta a.secondary:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* ============================================================
+   FEATURE CARD GRID
+   ============================================================ */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.feature-card {
+  display: block;
+  padding: 1.25rem 1.25rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--md-default-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+  color: var(--md-default-fg-color);
+  text-decoration: none;
+  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+.feature-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--md-accent-fg-color);
+  box-shadow: 0 8px 20px -8px var(--md-accent-fg-color);
+  color: var(--md-accent-fg-color);
+}
+.feature-card .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.4rem;
+  background: var(--md-accent-fg-color--transparent);
+  color: var(--md-accent-fg-color);
+  font-size: 1.25rem;
+  margin-bottom: 0.6rem;
+  font-weight: 700;
+}
+.feature-card h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.feature-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.75;
+  line-height: 1.45;
+}
+
+/* ============================================================
+   QUICK STATS ROW
+   ============================================================ */
+.stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: var(--md-default-fg-color--lightest);
+}
+.stat-row .stat {
+  text-align: center;
+  min-width: 6rem;
+}
+.stat-row .stat .num {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--md-accent-fg-color);
+  line-height: 1;
+}
+.stat-row .stat .lbl {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  margin-top: 0.25rem;
+}
+
+/* ============================================================
+   GITHUB RIBBON (top-right) — inline SVG
+   ============================================================ */
+.home-github {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+  z-index: 10;
+  display: block;
+  line-height: 0;
+}
+.home-github svg .octo-arm {
+  transform-origin: 130px 106px;
+  animation: octocat-wave 1.4s ease-in-out infinite;
+}
+@keyframes octocat-wave {
+  0%, 100% { transform: rotate(0); }
+  20%, 60% { transform: rotate(-25deg); }
+  40%, 80% { transform: rotate(10deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-github svg .octo-arm { animation: none; }
+}
+
+/* ============================================================
+   PRINT: kill hero
+   ============================================================ */
+@media print {
+  .home-hero, .feature-grid { display: none; }
+}
