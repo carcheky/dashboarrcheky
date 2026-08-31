@@ -44,13 +44,17 @@ We adopt a **two-phase plan**:
 **Phase 1 (this PR / branch `fix/android-16kb-page-size`): minimum-effort,
 zero-toolchain-change workaround.** Add
 `android.packagingOptions.jniLibs.useLegacyPackaging = true` to
-`lunasea/android/app/build.gradle` and
-`android.bundle.enableUncompressedNativeLibs=false` to
-`lunasea/android/gradle.properties`. This forces Gradle to ship `.so` files
+`lunasea/android/app/build.gradle`. This forces Gradle to ship `.so` files
 **compressed inside the APK** and let the system loader extract them at
 install time. The extracted files live on disk, not in the APK's zip
 alignment, so the 16 KB page-size dialog goes away without requiring AGP/Gradle
 upgrades.
+
+> Note: an earlier draft of this Phase 1 also added
+> `android.bundle.enableUncompressedNativeLibs=false` to `gradle.properties`.
+> That flag was **removed in AGP 8.1** — setting it makes the build fail with
+> `Failed to apply plugin 'com.android.internal.application'`. The
+> `useLegacyPackaging = true` setting alone is sufficient for the workaround.
 
 Trade-off: bigger install footprint (~5-15 MB more per APK), slightly slower
 first launch (one-time `.so` extraction). Worth it: the app becomes installable
@@ -109,4 +113,4 @@ release — that PR should not be merged on the same day as a routine fix.
   (related Flutter migration we already shipped in this repo)
 - `docs/reference/toolchain.md` — versions matrix, how to verify
 - `lunasea/android/app/build.gradle` — where Phase 1 lands
-- `lunasea/android/gradle.properties` — where Phase 1's bundle flag lands
+- `lunasea/android/build.gradle` — root project (unchanged)

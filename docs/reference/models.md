@@ -1,7 +1,8 @@
 # Models — AI routing reference
 
 > Which AI model to use for which task in this repo. One page, one source.
-> For commands + anti-patterns see [`.agents/skills/model-routing/SKILL.md`](../../.agents/skills/model-routing/SKILL.md).
+> For commands + anti-patterns see `.agents/skills/model-routing/SKILL.md`
+> at the repo root (this `docs/` site can't follow links outside its tree).
 
 ## TL;DR
 

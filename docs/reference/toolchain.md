@@ -56,8 +56,10 @@ Why we currently fail:
 The two-phase plan lives in [ADR-0004](../adr/0004-toolchain-and-16kb-page-size.md):
 
 - **Phase 1** (this branch): `packagingOptions.jniLibs.useLegacyPackaging=true`
-  + `android.bundle.enableUncompressedNativeLibs=false`. Forces the `.so` files
-  to be extracted at install time, sidestepping alignment checks.
+  in `app/build.gradle`. Forces the `.so` files to be extracted at install
+  time, sidestepping alignment checks. No `gradle.properties` change — the
+  `enableUncompressedNativeLibs=false` flag that older notes suggested is no
+  longer recognised by AGP 8.1 and breaks the build.
 - **Phase 2** (separate branch): bump AGP/Gradle/Kotlin/NDK so the `.so` are
   properly aligned and shipped uncompressed.
 

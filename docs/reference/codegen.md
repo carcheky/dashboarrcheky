@@ -3,16 +3,22 @@
 The 4-stage chain run by `npm run generate`:
 
 ```
-environment_config  ──►  lib/system/environment/environment.config.dart
+environment_config  ──►  lib/system/environment.dart
 spider              ──►  lib/system/environment/spider.generated.dart
 build_runner        ──►  *.g.dart  (Hive, json_serializable, retrofit)
 localization script ──►  lib/system/localization.g.dart  (if used)
 ```
 
+> **Path note.** `docs/reference/codegen.md` previously said the outputs
+> lived under `lib/system/environment/`. They don't — the YAML at
+> `lunasea/environment_config.yaml` sets `path: system/environment.dart`
+> (no subfolder), and spider writes its asset constants next to it. The
+> arch overview (`docs/architecture.md`) and the codebase itself are correct.
+
 ## Stage 1 — `environment_config`
 
 Source: `lunasea/environment_config.yaml`
-Output: `lunasea/lib/system/environment/environment.config.dart`
+Output: `lunasea/lib/system/environment.dart`
 Run: `npm run generate:environment`
 
 ## Stage 2 — `spider` (assets)

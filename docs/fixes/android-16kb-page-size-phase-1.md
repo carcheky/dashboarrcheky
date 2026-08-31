@@ -37,7 +37,6 @@ APK zip.
 
 ```
 lunasea/android/app/build.gradle       # no packagingOptions override
-lunasea/android/gradle.properties      # no bundle flag override
 lunasea/android/settings.gradle        # AGP 8.1.0, Kotlin 1.8.10
 lunasea/android/gradle/wrapper/...     # Gradle 8.0
 Dockerfile.android                     # NDK not pinned
@@ -70,12 +69,9 @@ packagingOptions {
 }
 ```
 
-**`lunasea/android/gradle.properties`** (appended):
-
-```
-# Phase 1 of ADR-0004: ship .so files compressed inside the APK ...
-android.bundle.enableUncompressedNativeLibs=false
-```
+No `gradle.properties` change — `android.bundle.enableUncompressedNativeLibs=false`
+was removed in AGP 8.1 and breaks the build. The single `useLegacyPackaging = true`
+setting is sufficient for the workaround.
 
 Both changes are reverted in Phase 2 (separate branch `fix/android-16kb-page-size-phase-2`,
 skill `toolchain-upgrade`) once AGP/Gradle/Kotlin/NDK are bumped so the `.so`
