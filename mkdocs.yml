@@ -77,6 +77,7 @@ plugins:
           - reference/gradle.md
           - reference/codegen.md
           - reference/toolchain.md
+          - reference/models.md
         Features:
           - features/TEMPLATE.md
         Fixes:
@@ -122,6 +123,7 @@ nav:
       - Gradle Config: reference/gradle.md
       - Codegen Pipeline: reference/codegen.md
       - Toolchain: reference/toolchain.md
+      - Models (AI routing): reference/models.md
   - Specs:
       - Template: specs/TEMPLATE/requirements.md
       - Template (design): specs/TEMPLATE/design.md

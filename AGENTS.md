@@ -30,6 +30,7 @@ Skip pleasantries. Lead with answer.
 | Route change | `docs/api/routing.md` |
 | Git / release / tag | `docs/workflow.md` |
 | Code style / naming | `docs/conventions.md` |
+| Pick AI model per task | `docs/reference/models.md` + `.agents/skills/model-routing/SKILL.md` |
 | Big picture / layout | `docs/architecture.md` |
 | Why a decision | `docs/adr/index.md` |
 | Lost / orientation | `docs/index.md` |

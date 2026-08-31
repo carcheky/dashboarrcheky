@@ -69,6 +69,11 @@ hide:
     <h3>Troubleshooting</h3>
     <p>Symptom → fix. Build, adb-wifi, Hive, go_router, APIs.</p>
   </a>
+  <a class="feature-card" href="reference/models/">
+    <div class="icon">M</div>
+    <h3>AI Model Routing</h3>
+    <p>Pick MiniMax-M3, V4-Flash, V4-Pro per task. Cost + benchmarks.</p>
+  </a>
   <a class="feature-card" href="features/TEMPLATE/">
     <div class="icon">F</div>
     <h3>New feature</h3>
