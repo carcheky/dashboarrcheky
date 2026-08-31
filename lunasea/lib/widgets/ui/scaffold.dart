@@ -33,22 +33,32 @@ class LunaScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (LunaPlatform.isAndroid) return android;
+    if (LunaPlatform.isAndroid) return android(context);
     return scaffold;
   }
 
-  Widget get android {
-    return WillPopScope(
-      onWillPop: () async {
-        if (!LunaSeaDatabase.ANDROID_BACK_OPENS_DRAWER.read()) return true;
-
+  Widget android(BuildContext context) {
+    // PopScope with canPop:false + manual Navigator.pop() reads drawer state
+    // at pop time (not build time), so ANDROID_BACK_OPENS_DRAWER + isDrawerOpen
+    // are always current. Replaces the deprecated WillPopScope.
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, Object? result) {
+        if (didPop) return;
+        if (!LunaSeaDatabase.ANDROID_BACK_OPENS_DRAWER.read()) {
+          Navigator.of(context).pop();
+          return;
+        }
         final state = scaffoldKey.currentState;
         if (state?.hasDrawer ?? false) {
-          if (state!.isDrawerOpen) return true;
-          state.openDrawer();
-          return false;
+          if (state!.isDrawerOpen) {
+            Navigator.of(context).pop();
+          } else {
+            state.openDrawer();
+          }
+          return;
         }
-        return true;
+        Navigator.of(context).pop();
       },
       child: scaffold,
     );

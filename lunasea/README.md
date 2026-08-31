@@ -1,6 +1,14 @@
-# <img width="40px" src="./assets/images/branding_logo.png" alt="LunaSea"></img>&nbsp;&nbsp;LunaSea
+> :warning: **The upstream LunaSea project is archived; this directory is the active fork of that source.** :warning:
 
-> :warning: **This project is no longer being actively maintained and this repository is archived.** :warning:
+> **Fork:** [`carcheky/dashboarrcheky`](https://github.com/carcheky/dashboarrcheky) —
+> Flutter app, predictive-back fix, 16 KB page-size plan, token-efficient docs.
+> Active development lives here. The original upstream README content is preserved below for context.
+
+---
+
+# <img width="40px" src="./assets/images/branding_logo.png" alt="LunaSea"></img>&nbsp;&nbsp;LunaSea (upstream, archived)
+
+> :warning: **The upstream LunaSea project is no longer actively maintained.** This README below describes the upstream app that this directory was forked from.
 
 LunaSea is a fully featured, open source self-hosted controller focused on giving you a seamless experience between all of your self-hosted media software remotely on your devices. LunaSea currently supports:
 

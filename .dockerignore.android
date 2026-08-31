@@ -1,0 +1,56 @@
+# .dockerignore for Android Docker build
+# Used when building Android APKs inside Docker.
+# (The original lunasea/.dockerignore is for the web Dockerfile — do not touch.)
+
+# VCS
+.git/
+.gitignore
+.github/
+
+# Flutter/Dart build outputs
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+localization/
+
+# Generated files
+*.g.dart
+*.freezed.dart
+*.config.dart
+*.gr.dart
+
+# Web/iOS/desktop targets we don't build in this container
+ios/
+macos/
+windows/
+linux/
+snap/
+debian/
+web/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.code-workspace
+.DS_Store
+
+# Node/npm (used by npm scripts but installed fresh in container)
+node_modules/
+package-lock.json
+
+# Docs / scripts we don't need in the image
+lunasea-docs/
+
+# Other monorepo packages
+lunasea-cloud-functions/
+lunasea-notification-service/
+
+# Docker artifacts
+Dockerfile*
+.dockerignore*
+docker-compose*.yml

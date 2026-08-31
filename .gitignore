@@ -1,1 +1,33 @@
+# OS
 .DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Env / secrets — never commit
+.env
+.env.local
+**/key.properties
+*.keystore
+*.jks
+
+# Node (root and per-package)
+node_modules/
+npm-debug.log*
+.npm/
+
+# Docker / build artifacts (per-package .gitignore covers the rest)
+
+# mkdocs output
+site/
+
+# local mkdocs build venv
+.venv-docs/
+
+# Local-only agent config (per-machine, not in repo)
+.claude/

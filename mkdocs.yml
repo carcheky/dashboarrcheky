@@ -1,0 +1,137 @@
+site_name: LunaSea Fork — Project Documentation
+site_description: Documentation for the LunaSea fork at github.com/carcheky/dashboarrcheky
+site_author: carcheky
+site_url: https://carcheky.github.io/dashboarrcheky/
+
+extra_css:
+  - stylesheets/extra.css
+
+repo_url: https://github.com/carcheky/dashboarrcheky
+repo_name: carcheky/dashboarrcheky
+edit_uri: edit/master/docs/
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search
+  - llmstxt:
+      full_output: llms-full.txt
+      sections:
+        Project:
+          - index.md
+          - roadmap.md
+          - timeline.md
+        Build & Workflow:
+          - build.md
+          - workflow.md
+          - conventions.md
+          - troubleshooting.md
+        Architecture & Decisions:
+          - architecture.md
+          - adr/index.md
+        Modules:
+          - modules/index.md
+        API & Data:
+          - api/index.md
+        Reference:
+          - reference/env-vars.md
+          - reference/gradle.md
+          - reference/codegen.md
+          - reference/toolchain.md
+          - reference/models.md
+        Features:
+          - features/TEMPLATE.md
+        Fixes:
+          - fixes/TEMPLATE.md
+          - fixes/android-predictive-back.md
+        Specs:
+          - specs/TEMPLATE/requirements.md
+          - specs/TEMPLATE/design.md
+          - specs/TEMPLATE/tasks.md
+
+nav:
+  - Home: index.md
+  - Roadmap: roadmap.md
+  - Timeline: timeline.md
+  - Build & Install: build.md
+  - Git Workflow: workflow.md
+  - Conventions: conventions.md
+  - Troubleshooting: troubleshooting.md
+  - Architecture: architecture.md
+  - Modules:
+      - Overview: modules/index.md
+      - Dashboard: modules/dashboard.md
+      - Sonarr: modules/sonarr.md
+      - Radarr: modules/radarr.md
+      - Lidarr: modules/lidarr.md
+      - SABnzbd: modules/sabnzbd.md
+      - NZBGet: modules/nzbget.md
+      - Tautulli: modules/tautulli.md
+      - Search: modules/search.md
+      - Settings: modules/settings.md
+  - Features:
+      - Template: features/TEMPLATE.md
+  - Fixes:
+      - Template: fixes/TEMPLATE.md
+      - Android predictive back: fixes/android-predictive-back.md
+  - API & Data:
+      - Overview: api/index.md
+      - HTTP (Dio + Retrofit): api/http.md
+      - Local DB (Hive): api/hive.md
+      - Routing (go_router): api/routing.md
+  - Reference:
+      - Environment Variables: reference/env-vars.md
+      - Gradle Config: reference/gradle.md
+      - Codegen Pipeline: reference/codegen.md
+      - Toolchain: reference/toolchain.md
+      - Models (AI routing): reference/models.md
+  - Specs:
+      - Template: specs/TEMPLATE/requirements.md
+      - Template (design): specs/TEMPLATE/design.md
+      - Template (tasks): specs/TEMPLATE/tasks.md
+  - Decisions (ADR):
+      - Index: adr/index.md
+      - 0001 Docker build: adr/0001-docker-build.md
+      - 0002 Branching model: adr/0002-branching-model.md
+      - 0003 Docs strategy: adr/0003-docs-strategy.md
+      - 0004 Toolchain & 16KB page size: adr/0004-toolchain-and-16kb-page-size.md
+      - 0005 Spec-driven workflow: adr/0005-spec-driven-workflow.md

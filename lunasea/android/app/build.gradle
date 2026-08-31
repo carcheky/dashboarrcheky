@@ -32,6 +32,18 @@ android {
     namespace = "app.lunasea.lunasea"
     compileSdkVersion 35
 
+    // Phase 1 of ADR-0004: package .so files with legacy (compressed) layout so
+    // Android 15+ / Pixel 8/9 (16 KB page size) install and launch without the
+    // PageSizeMismatchDialog. AGP 8.1 + Gradle 8.0 + default NDK don't align
+    // native libs to 16 KB boundaries; compressing extracts them to disk at
+    // install time and the alignment check passes. Reverted in Phase 2 when
+    // the toolchain is bumped so .so ship uncompressed and 16 KB-aligned.
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
