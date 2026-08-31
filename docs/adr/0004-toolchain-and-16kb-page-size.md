@@ -2,7 +2,10 @@
 
 ## Status
 
-Proposed. 2026-08-25.
+Accepted (Phase 1 shipped on branch `beta`). 2026-08-25.
+
+Phase 2 still pending. See `docs/fixes/android-16kb-page-size-phase-1.md` for
+the shipped-fix record.
 
 ## Context
 
