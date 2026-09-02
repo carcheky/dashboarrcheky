@@ -2,6 +2,7 @@
     package="app.lunasea.lunasea">
     <application
         android:name="${applicationName}"
+        android:allowBackup="false"
         android:usesCleartextTraffic="true"
         android:enableOnBackInvokedCallback="true"
         android:label="LunaSea"
