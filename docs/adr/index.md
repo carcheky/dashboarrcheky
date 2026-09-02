@@ -10,6 +10,8 @@ Why we did things the way we did.
 | [0004](0004-toolchain-and-16kb-page-size.md)      | Android toolchain + 16 KB page-size compatibility plan. |
 | [0005](0005-spec-driven-workflow.md)              | Spec phase (requirements/design/tasks) before code.     |
 | [0006](0006-plans-in-repo.md)                    | `.hermes/plans/` is a tracked team artifact.            |
+| [0007](0007-lidarr-api-exception.md)             | Lidarr API stays under `modules/` until strangler.    |
+| [0008](0008-test-strategy.md)                    | Stratified testing: state → controllers → widgets.     |
 
 ## Format
 

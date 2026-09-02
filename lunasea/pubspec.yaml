@@ -61,6 +61,10 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   flutter_native_splash: ^2.3.2
   msix: ^3.16.1
+  # Testing (ADR-0008). Pin major; allow patch+minor.
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.4
 dependency_overrides:
   intl: ^0.18.1
   http: ^1.0.0

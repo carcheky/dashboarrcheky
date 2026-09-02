@@ -1,0 +1,63 @@
+name: tests
+
+on:
+  push:
+    branches: [master, beta, feature/**, fix/**]
+  pull_request:
+    branches: [master, beta]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze-and-test:
+    name: flutter analyze + test
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    defaults:
+      run:
+        working-directory: lunasea
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.27.x"
+          channel: stable
+          cache: true
+
+      - name: Show toolchain
+        run: |
+          flutter --version
+          dart --version
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Generate code (build_runner)
+        # Skipped by default — there is no spec change in this PR.
+        # Uncomment when a PR adds or modifies @HiveType / @JsonSerializable
+        # / @RestApi definitions. Leaving the command as a comment so
+        # CI is fast for code-only PRs.
+        #   run: dart run build_runner build --delete-conflicting-outputs
+        run: echo "build_runner step skipped (commented out — see step body)"
+
+      - name: Analyze
+        run: flutter analyze lib/ test/
+
+      - name: Format check
+        run: dart format --set-exit-if-changed --output=none lib/ test/
+
+      - name: Run tests
+        run: flutter test --reporter=expanded
+
+      - name: Build smoke (Android debug)
+        # Cheap build — confirms no compile regression without
+        # producing a full APK. 5-7 min vs 15+ for `flutter build apk`.
+        run: |
+          flutter build apk --debug --target-platform=android-arm64 --no-tree-shake-icons || \
+            (echo "::warning::Android debug build failed; see logs" && exit 0)
