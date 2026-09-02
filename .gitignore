@@ -29,6 +29,18 @@ site/
 # local mkdocs build venv
 .venv-docs/
 
-# Local-only agent config (per-machine, not in repo)
-.claude/
-.hermes/
+# Local-only agent state (per-machine, never in repo)
+.hermes/state.db
+.hermes/state.db-*
+.hermes/.env
+.hermes/auth.json
+.hermes/sessions/
+.hermes/logs/
+.hermes/cache/
+.hermes/skills-lock.json
+
+# Local plans and skills ARE tracked in this repo (referenced by
+# docs/specs/* and AGENTS.md). Add the above machine-state paths only.
+# If you add a new top-level agent artifact, decide per-path: is it
+# shared (this repo, this team) or per-machine (gitignore)?
+
