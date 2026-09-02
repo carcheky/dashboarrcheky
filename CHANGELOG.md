@@ -56,6 +56,23 @@
   (currently still `app.lunasea.lunasea`, `display_name: LunaSea`,
   `MaterialApp.title: 'LunaSea'`). Doc and APK diverge.
 
+## [2026-09-02-gitignore-fix] - 2026-09-02
+
+Three commits that fix `.gitignore` so `.hermes/plans/` (referenced by
+the active spec) is trackable, and the per-machine subpaths
+(`state.db`, `auth.json`, `sessions/`, `logs/`, `cache/`, `skills/.hub/`,
+`.skills_prompt_snapshot.json`) stay ignored.
+
+- `2e1a47d0` — initial path-specific rules; track `.hermes/plans/`.
+- `59892ec4` — fix dead rule (`.hermes/skills-lock.json` → `.hermes/skills/.hub/`);
+  add `.skills_prompt_snapshot.json` to root; document the upstream
+  divergence.
+- (this section) — formalize as ADR-0006.
+
+External review by DeepSeek V4-Pro surfaced both bugs in the initial
+attempt. No code touched. See `docs/adr/0006-plans-in-repo.md` and
+`docs/timeline.md` row "2026-09-02 | review".
+
 ## [11.0.0+1] - 2026-08-25
 
 Forked from upstream LunaSea monorepo. Baseline.
