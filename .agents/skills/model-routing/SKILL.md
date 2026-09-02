@@ -102,6 +102,29 @@ hermes config get moa.active_preset   # must be ""
 - **Vision-Exp caps images at 800×800.** Small text gets garbled. Tile before sending for dense text (legal pages, schematics, dense screenshots).
 - **Peak hours double DeepSeek cost.** 01:00–04:00 and 06:00–10:00 UTC. From Europe, 06:00–10:00 hits the morning.
 - **M3 SWE-bench Pro 59.0% is vendor-reported.** Treat as a manufacturer spec, not a referee's ruling.
+- **V4-Flash can hang on multi-line prompts with unicode/emoji.** Symptom: timeout after 300s with no output. Root cause: large multi-line prompts with VS chars or emoji overload the Flash server-side preprocessor. **Fix:** if your prompt is >1.5K chars OR contains emoji/VS chars, escalate to V4-Pro. Cost difference is ~3×, but Pro returns deterministically. Do NOT retry Flash with the same prompt — retry Pro instead.
+- **Inline `hermes -z '<prompt>'` payload limit.** Herme's CLI argument parser refuses prompts that, combined with shell quoting, exceed ~4–8 KB on the command line. For longer prompts, write the prompt to a file (`write_file` to a tmp path) and pipe: `cat prompt.md | hermes -m deepseek-v4-pro --provider deepseek -z -`. This is the canonical pattern for bulk summarization, full-doc reviews, and 5+ file diff analysis.
+- **Probe slug with Flash or M3, never Pro.** A 1-token "di OK" probe with V4-Pro wastes $0.005 and is overkill. Use Flash or M3 for liveness checks; reserve Pro for the actual task.
+
+## The "I delegated to Pro" trap
+
+A subtle failure: agent rationalizes "this is multi-file, I'll just
+use Pro to be safe" — but the task is a grep, a 50-line read, or a
+single decision. Pro is 3× more expensive than Flash and ~3× more
+expensive than M3 (which is free). The cost rule from the user
+profile is: route as much as possible to M3 (Token Plan prepaid),
+escalate to Pro only when justified by one of the criteria in
+`docs/reference/models.md`.
+
+If a task could be done in <30s on M3 with the right tools, do not
+delegate to Pro. Delegate when:
+
+- Input or expected output exceeds ~10K tokens (long-doc summarization, multi-file refactor planning).
+- The decision is architectural with several trade-off dimensions.
+- Security-sensitive code or auth flow review.
+- The task is bulk classification with deterministic structure (Flash is better here too, but Pro is acceptable).
+
+Anything else: read + decide yourself.
 
 ## Verification
 
