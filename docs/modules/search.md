@@ -1,20 +1,48 @@
 # Search module
 
-Cross-service search: queries Sonarr, Radarr, Lidarr simultaneously and
-merges results.
+Búsqueda sobre **indexadores Newznab / Torznab**. **No** busca en
+Sonarr/Radarr/Lidarr — esa funcionalidad de "buscar para añadir" vive
+dentro de cada módulo (ej. `SonarrAddSeriesSearchPage`).
 
 - Path: `lib/modules/search/`
 - Barrel: `lib/modules/search.dart`
-- Entry: `SearchPage`
+- HTTP: `NewznabAPI` (definido en `lib/vendor/`, no en `lib/api/search/`)
+- State: `lib/modules/search/core/state.dart` (`LunaSearchState`,
+  ChangeNotifier)
+- API data: `lib/modules/search/core/api.dart` + `core/models/`
+  (category, subcategory, result)
+- DB: `lib/database/models/indexer.dart` (configuración de indexadores)
+- Routes: `lib/modules/search/routes.dart` (barrel) + `routes/<sub>/route.dart`
+  - `categories/` — árbol de categorías
+  - `subcategories/` — subcategoría seleccionada
+  - `results/` — resultados de la búsqueda
+  - `search.dart` — entry
 
-## How it works
+## Cómo funciona (real)
 
-Each enabled module exposes a `SearchableItem` mixin. The search coordinator
-fans out to all enabled modules in parallel, debounces input, and merges
-results by type (series / movie / artist / etc.).
+1. El usuario configura uno o más indexadores Newznab/Torznab en
+   Settings → Indexers (modelo `Indexer` en Hive).
+2. `LunaIndexer` mantiene la lista activa.
+3. Al buscar, `LunaSearchState` crea un `NewznabAPI` por indexador y
+   fan-out en paralelo.
+4. Los resultados se devuelven como `NewznabResultData` y se renderizan
+   en `routes/results/`.
 
-## Adding a module to search
+**No existe** un mixin `SearchableItem` ni un `SearchCoordinator`.
+Tampoco hay un `SearchPage` global; el flujo es
+`Search → Categories → Subcategory → Indexer → Results`.
 
-1. Add `SearchableItem` mixin to the module's state holder.
-2. Implement the search logic.
-3. Register the result type in `SearchCoordinator`.
+## Adding an indexer protocol
+
+1. Si el protocolo es Newznab-compatible, no hace falta código — solo
+   añadir el indexer desde Settings.
+2. Si necesitas un protocolo distinto (Torznab-only sin fallback
+   Newznab), añadir un `*API` paralelo a `NewznabAPI` en
+   `lib/vendor/` + un `*ResultData` en `lib/modules/search/core/models/`.
+
+## Adding a category type
+
+1. Añadir el modelo en `lib/modules/search/core/models/`.
+2. Actualizar el árbol en `routes/categories/` y
+   `routes/subcategories/`.
+3. `npm run generate:build_runner` y `dart analyze lib/`.

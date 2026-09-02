@@ -31,3 +31,4 @@ site/
 
 # Local-only agent config (per-machine, not in repo)
 .claude/
+.hermes/

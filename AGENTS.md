@@ -23,7 +23,8 @@ Skip pleasantries. Lead with answer.
 | Task | Load |
 |------|------|
 | Build APK / install / adb wifi | `docs/build.md` |
-| New feature (Sonarr/Radarr/Lidarr/SAB/NZBGet/Tautulli/Search/Settings) | `docs/modules/<name>.md` + `docs/features/TEMPLATE.md` |
+| **Spec a new feature (>1 file, behavior change)** | `docs/specs/TEMPLATE/` + `docs/SUMMARY.md` + `docs/adr/0005-spec-driven-workflow.md` |
+| **Shipped feature doc (user-facing)** | `docs/features/TEMPLATE.md` + el `docs/modules/<name>.md` afectado |
 | Bug fix | `docs/fixes/TEMPLATE.md` + `docs/troubleshooting.md` |
 | HTTP endpoint | `docs/api/http.md` |
 | Hive schema change | `docs/api/hive.md` |
@@ -34,6 +35,7 @@ Skip pleasantries. Lead with answer.
 | Big picture / layout | `docs/architecture.md` |
 | Why a decision | `docs/adr/index.md` |
 | Lost / orientation | `docs/index.md` |
+| **Spec vs Feature doc confusion** | `docs/SUMMARY.md` |
 | Close session / handoff | `.agents/sessions/TEMPLATE.md` |
 
 ## Conventions (terse)
@@ -41,11 +43,12 @@ Skip pleasantries. Lead with answer.
 - ✅ Read router doc BEFORE editing module.
 - ✅ Run `dart analyze lib/` in Docker after edit.
 - ✅ Conventional Commits. Use `npm run commit` (walks you).
-- ✅ New feature → create `docs/features/<slug>.md` same PR.
+- ✅ New feature (>1 file, behavior change) → spec FIRST en `docs/specs/<slug>/{requirements,design,tasks}.md` (template en `docs/specs/TEMPLATE/`). Después, al mergear, `docs/features/<slug>.md`. Ver `docs/SUMMARY.md`.
 - ✅ Bug fix → create `docs/fixes/<slug>.md` same PR.
 - ✅ Session handoff → update `.agents/sessions/<date>-<slug>.md` before closing.
 - ✅ Public Dart classes prefixed `Luna`.
 - ✅ New Hive fields at end with `defaultValue:`. Never reorder.
+- ✅ New module needs `docs/modules/<name>.md` + entry en `mkdocs.yml` + case en `lib/modules.dart` `LunaModule` enum (regenerar `modules.g.dart`).
 
 ## NEVER
 

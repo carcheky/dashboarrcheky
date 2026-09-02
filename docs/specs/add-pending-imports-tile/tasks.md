@@ -3,17 +3,25 @@
 > Ordered work breakdown. One row per agent step. Same shape as `todo`.
 > Cross out a row when done.
 
-**Status:** draft
+**Status:** ready-for-implementation (spec approved, awaiting build slot)
 **Pairs with:** `requirements.md`, `design.md`
 **Branch:** `feature/add-pending-imports-tile`
 
+> **Pre-implementation checklist (ya hecho, 2026-08-25):**
+> - [x] Spec files committed (requirements, design, tasks) — commits
+>       `755df4cf`, `e0ca9eb2`, `705b790e` en `master`.
+> - [x] Plan maestro en `.hermes/plans/2026-09-01_120124-dashboard-stack-widgets.md`.
+>
+> **Lo siguiente:** branch `feature/add-pending-imports-tile` desde
+> `master`, implementar tasks 1-32, mergear a `beta`, luego tasks 33-37.
+
 ## Order
 
-1. [ ] Spec files committed
+1. [ ] Branch `feature/add-pending-imports-tile` desde `master`
 2. [ ] Verify API state (queue, system, manualimport exist for both)
 3. [ ] Create Sonarr models (mirror RadarrManualImport*)
 4. [ ] Create Sonarr controllers (mirrors Radarr)
-5. [ ] Add LuminaPendingImport value type
+5. [ ] Add LunaPendingImport value type
 6. [ ] Extend DashboardState with pendingImports slice + timer
 7. [ ] Build tile_pending_imports widget (shell)
 8. [ ] Build pending_import_row widget
@@ -22,7 +30,16 @@
 11. [ ] Localization
 12. [ ] dart analyze + build APK + smoke test on device
 13. [ ] Commit + PR + merge to beta
-14. [ ] Flip row 8 in roadmap.md, add timeline.md entry, create feature doc
+14. [ ] Flip row en roadmap.md (esta spec NO es row 8 — ver Nota), add timeline.md entry, create feature doc
+
+> **Nota de reconciliación 2026-09-02:** la versión previa de este
+> tasks.md decía "Flip row 8 in `docs/roadmap.md`" — pero `row 8` en
+> el roadmap actual es "**4K / HDR quality profile awareness**", que
+> es una feature DIFERENTE. Esta spec (`add-pending-imports-tile`) no
+> tiene row propio en `docs/roadmap.md`; al mergear hay que AÑADIR
+> un row nuevo (no flip uno existente) en la sección "Past — shipped"
+> de `docs/timeline.md` y, si se quiere, crear un row "Shipped" en
+> el roadmap. Ver [../roadmap.md](../../roadmap.md).
 
 ## Tasks
 
@@ -63,8 +80,8 @@
 | 33 | Open PR against `beta` | — | `feature-builder` |
 | 34 | Merge PR after CI green | — | manual |
 | 35 | Create `docs/features/add-pending-imports-tile.md` (user-facing doc, copy user stories + screenshots placeholders) | `docs/features/add-pending-imports-tile.md` | `docs-keeper` |
-| 36 | Flip row 8 in `docs/roadmap.md` from `[ ]` to `[x]`; add row to `docs/timeline.md` | `docs/roadmap.md`, `docs/timeline.md` | `docs-keeper` |
-| 37 | Update `docs/modules/dashboard.md` "Key files" section with new tile files | `docs/modules/dashboard.md` | `docs-keeper` |
+| 36 | Add row to `docs/timeline.md` "Past — shipped" (NO flip row 8 of roadmap — row 8 es otra feature). Optional: add a "Shipped" row en roadmap. | `docs/timeline.md`, optionally `docs/roadmap.md` | `docs-keeper` |
+| 37 | Update `docs/modules/dashboard.md` "Patrón tile" section with new pending-imports page | `docs/modules/dashboard.md` | `docs-keeper` |
 
 ## Done when
 
@@ -73,7 +90,7 @@
 - [ ] APK installs and reproduces the happy path on Pixel 9.
 - [ ] `docs/features/add-pending-imports-tile.md` created with all sections filled.
 - [ ] Commit footer `Docs:` points to both the spec dir and the feature doc.
-- [ ] Row 8 in `docs/roadmap.md` is `[x]` and `docs/timeline.md` has a new row.
+- [ ] `docs/timeline.md` has a new row under "Past — shipped".
 - [ ] PR merged to `beta`.
 
 ## References
@@ -86,3 +103,4 @@
 - Module docs: `../../modules/dashboard.md`, `../../modules/sonarr.md`,
   `../../modules/radarr.md`
 - API docs: `../../api/http.md`, `../../api/hive.md`
+- Spec vs feature doc: `../../SUMMARY.md`

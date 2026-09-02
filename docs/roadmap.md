@@ -76,11 +76,11 @@ New module work. Each is its own branch + spec + fix/feature doc.
 
 When you pick the next item:
 
-1. Copy `docs/features/TEMPLATE` → `docs/features/<slug>.md`. Fill `requirements.md` first per `spec-driven-feature` skill.
+1. Copy `docs/features/TEMPLATE.md` → `docs/features/<slug>.md`. Fill `requirements.md` first per `spec-driven-feature` skill.
 2. Open branch `feature/<slug>` or `fix/<slug>` per `WORKFLOW.md`.
 3. Sub-agent (or human) executes; commit footer carries `Docs:` line.
 4. Merge to beta per ADR-0002.
-6. The new feature moves from `proposed` → `shipped`, gets a row in `docs/timeline.md`.
+5. The new feature moves from `proposed` → `shipped`, gets a row in `docs/timeline.md`.
 
 ## See also
 
@@ -90,3 +90,4 @@ When you pick the next item:
 - ADR-0005 — why specs exist
 - ADR-0004 — 16 KB page-size plan
 - `docs/architecture.md` — current modules + layers
+- `docs/SUMMARY.md` — specs vs features doc routing

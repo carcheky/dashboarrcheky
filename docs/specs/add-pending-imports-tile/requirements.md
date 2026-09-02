@@ -7,6 +7,8 @@
 **Owner:** cmartinezv
 **Module:** dashboard
 **Affects users:** yes
+**Last updated:** 2026-09-02 — sign-off re-confirmed; design.md
+también aprobado en la misma fecha.
 
 ## Problem
 

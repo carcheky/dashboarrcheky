@@ -71,8 +71,9 @@ Refs: #42
 
 | When | Action |
 |------|--------|
-| New feature | Create `docs/features/<slug>.md` same PR. Use template. |
-| Bug fix | Create `docs/fixes/<slug>.md` same PR. Use template. |
+| New feature (>1 file, behavior change) | **Spec FIRST** en `docs/specs/<slug>/{requirements,design,tasks}.md`. Plantilla: `docs/specs/TEMPLATE/`. Al mergear: `docs/features/<slug>.md` (plantilla `docs/features/TEMPLATE.md`). Ver [SUMMARY.md](SUMMARY.md). |
+| New module | `docs/modules/<name>.md` + nav entry en `mkdocs.yml` + case en `lib/modules.dart` `LunaModule` enum (regenerar `modules.g.dart`). |
+| Bug fix | `docs/fixes/<slug>.md` same PR. Use template. |
 | API / DB / route change | Update `docs/api/*.md`. |
 | Architecture change | Write ADR in `docs/adr/`. |
 | Session ends | Update `.agents/sessions/<date>-<slug>.md`. |

@@ -87,9 +87,13 @@ plugins:
           - specs/TEMPLATE/requirements.md
           - specs/TEMPLATE/design.md
           - specs/TEMPLATE/tasks.md
+          - specs/add-pending-imports-tile/requirements.md
+          - specs/add-pending-imports-tile/design.md
+          - specs/add-pending-imports-tile/tasks.md
 
 nav:
   - Home: index.md
+  - Summary: SUMMARY.md
   - Roadmap: roadmap.md
   - Timeline: timeline.md
   - Build & Install: build.md
@@ -108,6 +112,8 @@ nav:
       - Tautulli: modules/tautulli.md
       - Search: modules/search.md
       - Settings: modules/settings.md
+      - External modules: modules/external_modules.md
+      - Wake-on-LAN: modules/wake_on_lan.md
   - Features:
       - Template: features/TEMPLATE.md
   - Fixes:
@@ -128,6 +134,9 @@ nav:
       - Template: specs/TEMPLATE/requirements.md
       - Template (design): specs/TEMPLATE/design.md
       - Template (tasks): specs/TEMPLATE/tasks.md
+      - add-pending-imports-tile: specs/add-pending-imports-tile/requirements.md
+      - add-pending-imports-tile (design): specs/add-pending-imports-tile/design.md
+      - add-pending-imports-tile (tasks): specs/add-pending-imports-tile/tasks.md
   - Decisions (ADR):
       - Index: adr/index.md
       - 0001 Docker build: adr/0001-docker-build.md

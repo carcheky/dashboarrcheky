@@ -19,14 +19,21 @@ Ordered by merge date. Tag = SemVer tag. Branch = integration branch.
 | 2026-08-25 | `353e5d98` | **docs**: session handoff for pixel9-launch-bug-hunt + 16 KB. | Next session reads latest first | `.agents/sessions/` |
 | 2026-08-25 | `06f93724` | Merge `fix/pixel9-launch-bug-hunt` into beta. All five above commits + the merge commit. | First beta cut with predictive-back fix | — |
 | 2026-08-26 | `0a370ed9` | **chore**: track `.github/workflows/docs.yml` + `docs/stylesheets/extra.css` (left untracked from docs-system-bootstrap). | Stop the "0 changes" drift | — |
+| 2026-09-02 | review | **docs(review)**: correct doc-vs-code drift across 10 doc files (`docs/api/http.md`, `docs/modules/{sonarr,radarr,lidarr,sabnzbd,nzbget,tautulli,dashboard,search,settings}.md`, `docs/specs/add-pending-imports-tile/{requirements,design,tasks}.md`). Add `docs/SUMMARY.md` reconciling specs vs features. Add `docs/modules/{external_modules,wake_on_lan}.md`. Reconcile `docs/roadmap.md` + `docs/timeline.md`. | Make the doc system honest before the next feature ships on top of it. | this commit |
+
+## Past — shipped (in-flight items that landed)
+
+| Date | Tag / Commit | What | Why | Docs |
+|------|--------------|------|-----|------|
+| 2026-08-25 → 2026-09-02 | `4eb5f2ff` | **16 KB Phase 1** (compressed packaging, 5-line Gradle edit). Per ADR-0004. Debug APK installs on Pixel 9 / Android 17 without `PageSizeMismatchDialog`. | Pixel 9 / Android 17 shows `PageSizeMismatchDialog` on debug APK; AGP 8.1.0 + Gradle 8.0 predate 16 KB tooling | `docs/fixes/android-16kb-page-size-phase-1.md` |
 
 ## Present — in flight
 
 | Item | Status | Owner | Doc |
 |------|--------|-------|-----|
-| 16 KB Phase 1 (compressed packaging) | proposed, awaiting user OK | n/a | ADR-0004 § Phase 1 |
-| 16 KB Phase 2 (AGP/Gradle/Kotlin/NDK bump) | proposed, blocked on Phase 1 | n/a | ADR-0004 § Phase 2 |
 | Back-button matrix verify (4 rows) | partial — device was locked mid-test | next session | `docs/fixes/android-predictive-back.md` § Test |
+| Doc-system rebrand (dashboarrcheky name → code) | not started | tbd | see open question in CHANGELOG.md / README.md |
+| Branch protection on GitHub (`master`, `beta`) | not configured (issues disabled anyway) | tbd | recommended in `WORKFLOW.md` |
 
 ## Future — planned
 

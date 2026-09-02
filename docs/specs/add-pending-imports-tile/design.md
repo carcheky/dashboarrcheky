@@ -3,7 +3,8 @@
 > **How** the requirements are met. Tech choices, file paths, data shapes.
 > Approved before any code lands.
 
-**Status:** draft (awaiting requirements sign-off re-confirm)
+**Status:** approved (2026-09-02; sign-off re-confirmado en la
+misma fecha que requirements.md)
 **Pairs with:** `requirements.md`
 
 ## Approach
